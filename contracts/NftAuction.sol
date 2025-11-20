@@ -72,9 +72,10 @@ contract NftAuction is Initializable, UUPSUpgradeable{
         Auction storage auction =  auctions[_auctionId];
         require(!auction.ended && (auction.startTime + auction.duration) <= block.timestamp, "Auction has not ended");
         console.log("auction.nftContract:", auction.nftContract);
-        console.log("address(this),:", address(this));
+        console.log("address(this):", address(this));
+        console.log("auction.highestBidder:", auction.highestBidder);
         IERC721(auction.nftContract).safeTransferFrom(address(this), auction.highestBidder, auction.tokenId);
-        // payable(address(this)).transfer(address(this).balance);
+        payable(address(this)).transfer(address(this).balance);
         auction.ended = true;
     }
     function _authorizeUpgrade(address newImplementation) internal override view{
