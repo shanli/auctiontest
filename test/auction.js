@@ -46,7 +46,7 @@ async function  main() {
 
 
     await new Promise((resolve) => { setTimeout(resolve, 10 * 1000)});
-
+    // 调用合约中的endAuction时执行safeTransferFrom时ERC721IncorrectOwner
     await nftAuction.connect(singer).endAuction(0);
 
 
